@@ -8,6 +8,11 @@ using namespace std;
 int main(){
     int mainChoice;
 
+    vector<Chord> allChords;
+
+    Chord amChord = {"Am", {-1, 0, 2, 2, 1, 0}};
+    allChords.push_back(amChord);
+
     do{
         cout <<"\n🎸 GUITAR MASTER v1.0 🎸" << endl;
         cout << "1. Аккорды" << endl;
@@ -26,11 +31,20 @@ int main(){
                     showChordMenu();
                     cin >> subChoice1;
                     if (subChoice1 == 1){
-                        Chord testChord = {"Am", {-1, 0, 2, 2, 1, 0}};
-                        printChord(testChord);
+                        
+                        cout << "\n---- Библиотека аккордов ----" << endl;
+                        if (allChords.empty()){
+                            cout << "Список пуст :(" << endl;
+                        } else{
+                            for (const auto& c : allChords){
+                                printChord(c);
+                            } 
+                        }
+
                     } else if (subChoice1 == 2){
-                        Chord myChord = addChordInteractive();
-                        printChord(myChord);
+                        Chord newChord = addChordInteractive();
+                        allChords.push_back(newChord);
+                        cout << "Аккорд сохранен в библиотеке." << endl;
                     
                     }else if (subChoice1 != 0){
                         cout << "Функция в разработке..." << endl;
