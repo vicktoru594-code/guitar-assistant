@@ -26,7 +26,7 @@ int main(){
                     showChordMenu();
                     cin >> subChoice1;
                     if (subChoice1 == 1){
-                        Chord testChord = {"Am", {0, 2, 2, 1, 0, 0}};
+                        Chord testChord = {"Am", {-1, 0, 2, 2, 1, 0}};
                         printChord(testChord);
                     } else if (subChoice1 != 1){
                         cout << "Функция в разработке..." << endl;

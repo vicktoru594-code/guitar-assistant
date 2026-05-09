@@ -12,12 +12,21 @@ void showChordMenu(){
 }
 
 void printChord(const Chord& c){
-    cout << "\nАккорд: " << c.name << endl;
-    cout << "E A D G C E" << endl;
-    cout << "| | | | | |" << endl;
+    cout << "\n Аккорд: " << c.name << endl;
+    cout << " ------------------" << endl;
+    
+    vector<string> stringNames = {"E", "B", "G", "D", "A", "E"};
 
-    for (int f : c.frets){
-        cout << f << " ";
+    for (int i=5;i>=0;i--){
+        int fret = c.frets[i];
+        string symbol = "-";
+
+        if (fret == 0) symbol = "0";
+        else if (fret == -1) symbol = "X";
+        else symbol = to_string(fret);
+
+        cout << "  " << stringNames[5-i] << " | " << symbol << endl;
     }
-    cout << endl;
+    
+    cout << " ------------------" << endl;
 }
