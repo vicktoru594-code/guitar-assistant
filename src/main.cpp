@@ -8,10 +8,7 @@ using namespace std;
 int main(){
     int mainChoice;
 
-    vector<Chord> allChords;
-
-    Chord amChord = {"Am", {-1, 0, 2, 2, 1, 0}};
-    allChords.push_back(amChord);
+    vector<Chord> allChords = leadChordsFromFile("data/chords.txt");
 
     do{
         cout <<"\n🎸 GUITAR MASTER v1.0 🎸" << endl;
@@ -43,9 +40,23 @@ int main(){
 
                     } else if (subChoice1 == 2){
                         Chord newChord = addChordInteractive();
-                        allChords.push_back(newChord);
-                        cout << "Аккорд сохранен в библиотеке." << endl;
-                    
+
+                        bool exists = false;
+                        for (const auto& c : allChords) {
+                            if (c.name == newChord.name) {
+                                exists = true;
+                                break;
+                            }
+                        }
+
+                        if (!exists) {
+                            allChords.push_back(newChord);
+                            saveChordToFile(allChords, "data/chords.txt");
+                            cout << "Аккорд '" << newChord.name << "' создан!" << endl;
+                        } else {
+                            cout << "Аккорд с именем '" << newChord.name << "' уже существует." << endl;
+                        }
+                        
                     }else if (subChoice1 != 0){
                         cout << "Функция в разработке..." << endl;
                     }
