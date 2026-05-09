@@ -1,5 +1,7 @@
 #include "chord.h"
 #include <iostream>
+#include <vector>
+#include <string>
 
 using namespace std;
 
@@ -27,6 +29,31 @@ void printChord(const Chord& c){
 
         cout << "  " << stringNames[5-i] << " | " << symbol << endl;
     }
-    
+
     cout << " ------------------" << endl;
+}
+
+Chord addChordInteractive(){
+    Chord newChord;
+
+    cout << "\n----- Добавление нового аккорда -----" << endl;
+    cout << "Введите название аккорда: ";
+    cin.ignore();
+    getline(cin, newChord.name);
+
+    cout << "Введите лады для струн (от 6-ой к 1-ой):" << endl;
+    cout << "(Используйте 0, если струна открыта, и -1, если струна не звучит)" << endl;
+
+    vector<int> tempFrets(6);
+    string strings[]= {"E", "A", "D", "G", "B", "E"};
+
+    for (int i=0;i<6;i++){
+        cout << "Струна " << strings[i] << ": ";
+        cin >> tempFrets[i];
+    }
+
+    newChord.frets = tempFrets;
+
+    cout << "Аккорд '" << newChord.name << "' создан!" << endl;
+    return newChord;
 }

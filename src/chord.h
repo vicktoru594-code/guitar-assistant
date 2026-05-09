@@ -11,5 +11,6 @@ struct Chord{
 
 void showChordMenu();
 void printChord(const Chord& c);
+Chord addChordInteractive();
 
 #endif

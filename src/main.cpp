@@ -28,7 +28,11 @@ int main(){
                     if (subChoice1 == 1){
                         Chord testChord = {"Am", {-1, 0, 2, 2, 1, 0}};
                         printChord(testChord);
-                    } else if (subChoice1 != 1){
+                    } else if (subChoice1 == 2){
+                        Chord myChord = addChordInteractive();
+                        printChord(myChord);
+                    
+                    }else if (subChoice1 != 0){
                         cout << "Функция в разработке..." << endl;
                     }
                 }while (subChoice1 != 0);
