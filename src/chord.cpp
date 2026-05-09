@@ -2,6 +2,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <fstream>
 
 using namespace std;
 
@@ -54,6 +55,58 @@ Chord addChordInteractive(){
 
     newChord.frets = tempFrets;
 
-    cout << "Аккорд '" << newChord.name << "' создан!" << endl;
     return newChord;
+}
+
+void saveChordToFile(const vector<Chord>& chords, const string& filename){
+    ofstream file(filename);
+    if (!file.is_open()){
+        cerr << "Ошибка: не удалось открыть файл для записи." << endl;
+        return;
+    }
+
+    for (const auto& c : chords){
+        file << c.name;
+        for (int fret : c.frets){
+            file << ";" << fret;
+        }
+        file << endl;
+    }
+    file.close();
+}
+
+vector<Chord> leadChordsFromFile(const string& filename){
+    vector<Chord> chords;
+    ifstream file(filename);
+
+    if (!file.is_open()){
+        return chords;
+    }
+
+    string line;
+    while (getline(file,line)){
+        if (line.empty()) continue;
+
+        Chord c;
+        size_t pos = 0;
+        string token;
+        vector<string> tokens;
+
+        while ((pos = line.find(';')) != string::npos){
+            token = line.substr(0,pos);
+            tokens.push_back(token);
+            line.erase(0, pos+1);
+        }
+        tokens.push_back(line);
+
+        if (tokens.size() == 7){
+            c.name = tokens[0];
+            for (int i=0;i<6;i++){
+                c.frets.push_back(stoi(tokens[i+1]));
+            }
+            chords.push_back(c);      
+        }
+    }
+    file.close();
+    return chords;
 }
