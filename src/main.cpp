@@ -10,6 +10,8 @@ int main(){
 
     vector<Chord> allChords = leadChordsFromFile("data/chords.txt");
 
+    vector<PracticeSession> practiceLog = loadPracticeFromFile("data/practice_tracker.txt");
+
     do{
         cout <<"\n🎸 GUITAR MASTER v1.0 🎸" << endl;
         cout << "1. Аккорды" << endl;
@@ -68,7 +70,14 @@ int main(){
                 do{
                     showTrackerMenu();
                     cin >> subChoice2;
-                    if (subChoice2 != 0) cout << "Функция в разработке..." << endl;
+                    if (subChoice2 == 1) {
+                        addPracticeSession(practiceLog);
+                        savePracticeToFile(practiceLog, "data/practice_tracker.txt");
+                    }else if (subChoice2 == 2){
+                        printHistory(practiceLog);
+                    }else if (subChoice2 != 0){
+                        cout << "Неверный выбор" <<endl;
+                    }
                 }while (subChoice2 != 0);
                 break;
 
