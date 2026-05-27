@@ -2,6 +2,7 @@
 #include "chord.h"
 #include "tracker.h"
 #include "song.h"
+#include "metronome.h"
 
 using namespace std;
 
@@ -91,7 +92,16 @@ int main(){
                 break;
             
             case 4:
-                cout << "Метроном в разработке..." << endl;
+                int subChoice4;
+                do{
+                    showMetronomeMenu();
+                    cin >> subChoice4;
+                    if (subChoice4 == 1){
+                        startMetronome();
+                    } else if (subChoice4 != 0){
+                        cout << "Неверный выбор" <<endl;
+                    }
+                }while (subChoice3 != 0);
                 break;
             
             case 0:
