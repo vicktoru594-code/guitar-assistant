@@ -33,6 +33,10 @@ void saveSongsToFile() {
             file << chordLine << endl;
         }
         file << "---CHORDS_END---" << endl;
+
+        file << "---COMMENT_START---" << endl;
+        file << song.comment << endl;
+        file << "---COMMENT_END---" << endl;
     }
     file.close();
 }
@@ -56,6 +60,9 @@ void addSong() {
         if (line.empty()) break;
         newSong.chords.push_back(line);
     }
+
+    cout << "Комментарий (каподастр, рекомендуемый бой, нюансы): " << endl;
+    getline(cin, newSong.comment);
     
     songsDatabase.push_back(newSong);
     saveSongsToFile();

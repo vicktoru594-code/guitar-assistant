@@ -8,12 +8,13 @@ struct Song{
     std::string name;
     std::string author;
     std::vector<std::string> chords;
+    std::string comment;
 };
 
 extern std::vector<Song> songsDatabase;
 
 void showSongMenu();
-void addSong();;
+void addSong();
 void saveSongsToFile();
 
 #endif
