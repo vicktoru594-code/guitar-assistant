@@ -13,6 +13,9 @@ int main(){
 
     vector<PracticeSession> practiceLog = loadPracticeFromFile("data/practice_tracker.txt");
 
+    loadSongsFromFile();
+
+
     do{
         cout <<"\n🎸 GUITAR MASTER v1.0 🎸" << endl;
         cout << "1. Аккорды" << endl;
@@ -87,7 +90,34 @@ int main(){
                 do{
                     showSongMenu();
                     cin >> subChoice3;
-                    if (subChoice3 != 0) cout << "Функция в разработке..." << endl;
+                    if (subChoice3 == 1) {
+                        addSong();
+                    }else if (subChoice3 == 2){
+                        listAllSongs();
+                    } else if (subChoice3 == 3) {
+                        if (songsDatabase.empty()) {
+                            cout << "\n⚠️ База песен пуста. Сначала добавьте песню через пункт 1." << endl;
+                        } else {
+                            listAllSongs();
+
+                            cout << "\nВведите номер песни для просмотра (1-" << songsDatabase.size() << "), или 0 для отмены: ";
+                            int songIndexInput;
+                            cin >> songIndexInput;
+
+                            if (songIndexInput == 0) {
+                                continue;
+                            }
+
+                            if (songIndexInput >= 1 && songIndexInput <= static_cast<int>(songsDatabase.size())) {
+                                viewSongDetails(songIndexInput - 1);
+                            } else {
+                                cout << "❌ Ошибка: Песни с таким номером не существует." << endl;
+                            }
+                        }
+                    
+                    }else if (subChoice3 != 0){
+                        cout << "Неверный выбор" <<endl;
+                    }
                 }while (subChoice3 != 0);
                 break;
             
