@@ -1,0 +1,11 @@
+---SONG_START---
+---NAME---
+Утро
+---AUTHOR---
+Дайте танк!
+---CHORDS_START---
+Am
+G
+C
+F
+---CHORDS_END---

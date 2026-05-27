@@ -86,7 +86,14 @@ int main(){
                 do{
                     showSongMenu();
                     cin >> subChoice3;
-                    if (subChoice3 != 0) cout << "Функция в разработке..." << endl;
+                    if (subChoice3 == 1) {
+                        addSong();
+                        saveSongsToFile();
+                    }else if (subChoice3 == 2){
+                        cout << "Функция в разработке..." <<endl;
+                    }else if (subChoice3 != 0){
+                        cout << "Неверный выбор" <<endl;
+                    }
                 }while (subChoice3 != 0);
                 break;
             

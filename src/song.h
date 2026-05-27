@@ -6,11 +6,14 @@
 
 struct Song{
     std::string name;
-    std::string autor;
+    std::string author;
     std::vector<std::string> chords;
 };
 
-void showSongMenu();
+extern std::vector<Song> songsDatabase;
 
+void showSongMenu();
+void addSong();;
+void saveSongsToFile();
 
 #endif
