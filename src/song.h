@@ -18,5 +18,6 @@ void addSong();
 void saveSongsToFile();
 void loadSongsFromFile();
 void listAllSongs(); 
+void viewSongDetails(int index);
 
 #endif

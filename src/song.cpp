@@ -12,6 +12,7 @@ void showSongMenu(){
     cout << "\n----  МОИ ПЕСНИ ----" << endl;
     cout << "1. Добавить песню" << endl;
     cout << "2. Список песен" << endl;
+    cout << "3. Просмотреть детали песни" << endl;
     cout << "0. Назад в главное меню" << endl;
     cout << "Ваш выбор: ";
 }
@@ -147,5 +148,37 @@ void listAllSongs() {
         cout << "----------------------------------------" << endl;
     }
     
+}
+
+void viewSongDetails(int index){
+    if (index < 0 || index >= static_cast<int>(songsDatabase.size())) {
+        cout << "\n❌ Ошибка: Песни с таким номером не существует." << endl;
+        return;
+    }
+
+    const Song& s = songsDatabase[index];
+
+    cout << "\n========================================" << endl;
+    cout << "🎵 ПОДРОБНОСТИ ПЕСНИ #" << (index + 1) << endl;
+    cout << "========================================" << endl;
+    
+    cout << "Название:   " << s.name << endl;
+    cout << "Исполнитель: " << s.author << endl;
+    
+    cout << "\n--- АККОРДЫ ---" << endl;
+    if (s.chords.empty()) {
+        cout << "(Аккорды не указаны)" << endl;
+    } else {
+        for (const auto& chordLine : s.chords) {
+            cout << chordLine << endl;
+        }
+    }
+
+    if (!s.comment.empty()) {
+        cout << "\n--- КОММЕНТАРИЙ ---" << endl;
+        cout << s.comment << endl;
+    }
+
+    cout << "========================================" << endl;
 }
 
