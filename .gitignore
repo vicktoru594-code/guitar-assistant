@@ -2,6 +2,7 @@
 *.exe
 *.out
 *.app
+guitar_app
 
 .vscode/
 .idea/
