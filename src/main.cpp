@@ -12,6 +12,9 @@ int main(){
 
     vector<PracticeSession> practiceLog = loadPracticeFromFile("data/practice_tracker.txt");
 
+    loadSongsFromFile();
+
+
     do{
         cout <<"\n🎸 GUITAR MASTER v1.0 🎸" << endl;
         cout << "1. Аккорды" << endl;
@@ -88,9 +91,8 @@ int main(){
                     cin >> subChoice3;
                     if (subChoice3 == 1) {
                         addSong();
-                        saveSongsToFile();
                     }else if (subChoice3 == 2){
-                        cout << "Функция в разработке..." <<endl;
+                        listAllSongs();
                     }else if (subChoice3 != 0){
                         cout << "Неверный выбор" <<endl;
                     }

@@ -2,6 +2,7 @@
 #include <iostream>
 #include <fstream>
 #include <limits>
+#include <sstream> 
 
 using namespace std;
 
@@ -69,6 +70,82 @@ void addSong() {
     cout << "✅ Песня '" << newSong.name << "' добавлена и сохранена!" << endl;
 }
 
+void loadSongsFromFile() {
+    ifstream file("data/songs.txt");
+    if (!file.is_open()) {
+        return;
+    }
 
+    string line;
+    while (getline(file, line)) {
+        if (line.empty()) continue;
 
+        if (line == "---SONG_START---") {
+            Song newSong;
+
+            if (getline(file, line) && line == "---NAME---") {
+                getline(file, newSong.name);
+            }
+
+            if (getline(file, line) && line == "---AUTHOR---") {
+                getline(file, newSong.author);
+            }
+
+            if (getline(file, line) && line == "---CHORDS_START---") {
+                while (getline(file, line)) {
+                    if (line == "---CHORDS_END---") break;
+                    newSong.chords.push_back(line);
+                }
+            }
+
+            if (getline(file, line) && line == "---COMMENT_START---") {
+                string commentLine;
+                while (getline(file, commentLine)) {
+                    if (commentLine == "---COMMENT_END---") break;
+                    if (!newSong.comment.empty()) newSong.comment += "\n"; 
+                    newSong.comment += commentLine;
+                }
+            }
+
+            songsDatabase.push_back(newSong);
+        }
+    }
+    file.close();
+}
+
+void listAllSongs() {
+    if (songsDatabase.empty()) {
+        cout << "\n📂 Список пуст. Добавьте первую песню!" << endl;
+        return;
+    }
+
+    cout << "\n ВАША БИБЛИОТЕКА ПЕСЕН:" << endl;
+    cout << "----------------------------------------" << endl;
+
+    for (size_t i = 0; i < songsDatabase.size(); ++i) {
+        const Song& s = songsDatabase[i];
+        
+        cout << "[" << (i + 1) << "] " << s.name << " — " << s.author << endl;
+        
+        cout << "   Аккорды: ";
+        if (!s.chords.empty()) {
+            int linesToShow = min((int)s.chords.size(), 3);
+            for (int j = 0; j < linesToShow; ++j) {
+                cout << s.chords[j] << " ";
+            }
+            if (s.chords.size() > 3) cout << "...";
+        } else {
+            cout << "(нет аккордов)";
+        }
+        cout << endl;
+
+        if (!s.comment.empty()) {
+            cout << "   💬 " << s.comment.substr(0, 50);
+            if (s.comment.length() > 50) cout << "...";
+            cout << endl;
+        }
+        cout << "----------------------------------------" << endl;
+    }
+    
+}
 

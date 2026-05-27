@@ -16,5 +16,7 @@ extern std::vector<Song> songsDatabase;
 void showSongMenu();
 void addSong();
 void saveSongsToFile();
+void loadSongsFromFile();
+void listAllSongs(); 
 
 #endif
