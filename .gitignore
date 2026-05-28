@@ -1,12 +1,16 @@
+build/
 *.o
 *.exe
 *.out
 *.app
 guitar_app
+test_runner
 
 .vscode/
 .idea/
 *.swp
 *.swo
 
+data/*.txt
 .DS_Store
+Thumbs.db
