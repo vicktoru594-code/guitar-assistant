@@ -136,11 +136,7 @@ int main() {
     
     CU_basic_set_mode(CU_BRM_VERBOSE);
     CU_ErrorCode result = CU_basic_run_tests();
-    
-    printf("\n========================================\n");
-    printf("Tests completed.\n");
-    printf("========================================\n");
-    
+        
     CU_cleanup_registry();
     return result;
 }
